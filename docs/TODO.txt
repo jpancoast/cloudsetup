@@ -16,3 +16,6 @@ Scripts/playbooks to do the following:
 
     8.  Destroy those ELB's
 
+
+
+Perhaps a python script (or scripts) that loads all inventory files and runs ansible for the all inventory files (so it would run it for us-east-1, us-west-2, all the regions. Or something.)
