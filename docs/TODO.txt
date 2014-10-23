@@ -1,0 +1,18 @@
+
+Scripts/playbooks to do the following:
+    1.  Create 2 VPC's in separate regions with intra-VPC connectivity.
+
+    2.  Destroy those two VPC's
+
+    3.  Launch 3 consul instances in each VPC that can all talk to each other.
+
+    4.  Destroy all those consul instances.
+
+    5.  Launch 3 coreos + docker instances in each VPC. Maybe have separate groups: web and middle.
+
+    6.  Destroy coreos + docker instances.
+
+    7.  Creae ELB's that route to web instances
+
+    8.  Destroy those ELB's
+
