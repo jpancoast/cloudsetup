@@ -1,0 +1,37 @@
+---
+- name: "Create VPC"
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: create vpc
+      local_action:
+        module: ec2_vpc
+        state: present
+        cidr_block: 172.22.0.0/16
+        resource_tags: { "Environment":"Development" }
+        subnets:
+          - cidr: 172.22.1.0/24
+            az: us-west-2c
+            resource_tags: { "Environment":"Dev", "Tier" : "Web" }
+          - cidr: 172.22.2.0/24
+            az: us-west-2b
+            resource_tags: { "Environment":"Dev", "Tier" : "App" }
+          - cidr: 172.22.3.0/24
+            az: us-west-2a
+            resource_tags: { "Environment":"Dev", "Tier" : "DB" }
+        internet_gateway: True
+        route_tables:
+          - subnets:
+              - 172.22.2.0/24
+              - 172.22.3.0/24
+            routes:
+              - dest: 0.0.0.0/0
+                gw: igw
+          - subnets:
+              - 172.22.1.0/24
+            routes:
+              - dest: 0.0.0.0/0
+                gw: igw
+        region: us-west-2
+      register: vpc

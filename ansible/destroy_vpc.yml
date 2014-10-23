@@ -1,0 +1,12 @@
+---
+- name: "Destroy VPC"
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: destroy vpc
+      local_action:
+        module: ec2_vpc
+        state: absent
+        vpc_id: vpc-aaaaaaa
+        region: us-west-2
