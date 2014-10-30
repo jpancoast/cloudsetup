@@ -24,6 +24,11 @@ Scripts/playbooks to do the following:
 Perhaps a python script (or scripts) that loads all inventory files and runs ansible for the all inventory files (so it would run it for us-east-1, us-west-2, all the regions. Or something.)
 
 
+https://coreos.com/docs/running-coreos/cloud-providers/ec2/
+http://docker.readthedocs.org/en/v0.7.3/installation/amazon/
+http://progrium.com/blog/2014/09/10/automatic-docker-service-announcement-with-registrator/
+
+
 http://blog-it.hypoport.de/2014/07/25/a-continuous-deployment-pipeline-with-gradle-and-docker/
 http://dantehranian.wordpress.com/2014/10/25/building-docker-images-within-docker-containers-via-jenkins/
 http://devo.ps/blog/how-we-use-docker-to-run-and-deploy-devops/

@@ -1,0 +1,55 @@
+graph G {
+    #http://www.graphviz.org/pdf/dotguide.pdf
+    rankdir = LR
+
+    Internet [ color = blue, style = filled ]
+    monitoring_vpc [ color = green, style = filled ]
+    logging_vpc [ color = red, style = filled ]
+
+    public_vpc_1 [ color = lightgray, style = filled ]
+    public_vpc_2 [ color = lightgray, style = filled ]
+    public_vpc_3 [ color = lightgray, style = filled ]
+
+    ranksep = 2.0
+    nodesep = .5
+
+    Internet -- public_vpc_1;
+    Internet -- public_vpc_2;
+    Internet -- public_vpc_3;
+
+    {
+        rank = same;
+        Internet;
+    }
+
+    {
+        rank = same;
+        monitoring_vpc; logging_vpc;
+    }
+
+    {
+        rank = same;
+        public_vpc_1; public_vpc_2; public_vpc_3;
+    }
+
+
+    Internet -- monitoring_vpc;
+    Internet -- logging_vpc;
+
+    monitoring_vpc -- public_vpc_1;
+    monitoring_vpc -- public_vpc_2;
+    monitoring_vpc -- public_vpc_3;
+
+    public_vpc_1 -- logging_vpc;
+    public_vpc_2 -- logging_vpc;
+    public_vpc_3 -- logging_vpc;
+
+    public_vpc_1 -- public_vpc_2;
+    public_vpc_1 -- public_vpc_3;
+
+    public_vpc_2 -- public_vpc_1;
+    public_vpc_2 -- public_vpc_3;
+
+    public_vpc_3 -- public_vpc_1;
+    public_vpc_3 -- public_vpc_2;
+}
