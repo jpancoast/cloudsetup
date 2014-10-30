@@ -6,19 +6,20 @@ digraph G {
     "Monitoring VPC" [ color = green, style = filled ]
     "Logging VPC" [ color = red, style = filled ]
 
-    "Public VPC 1" [ color = lightgray, style = filled ]
-    "Public VPC 2" [ color = lightgray, style = filled ]
-    "Public VPC 3" [ color = lightgray, style = filled ]
+    "Public VPC 1" [ color = "darkorchid1", style = filled ]
+    "Public VPC 2" [ color = "darkorchid1", style = filled ]
+    "Public VPC 3" [ color = "darkorchid1", style = filled ]
 
     ranksep = 2.0
     nodesep = .5
 
-    Internet -> "Public VPC 1" [dir=both color="red:blue"];
-    Internet -> "Public VPC 2" [dir=both color="red:blue"];
-    Internet -> "Public VPC 3" [dir=both color="red:blue"];
+    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1"];
+
 
     {
-        rank = same;
+        rank = min;
         Internet;
     }
 
@@ -29,24 +30,24 @@ digraph G {
 
 
     {
-        rank = same;
+        rank = max;
         "Monitoring VPC"; "Logging VPC";
     }
 
 
-    Internet -> "Monitoring VPC" [dir=both color="red:blue"];
-    Internet -> "Logging VPC" [dir=both color="red:blue"];
 
-    "Monitoring VPC" -> "Public VPC 1";
-    "Monitoring VPC" -> "Public VPC 2";
-    "Monitoring VPC" -> "Public VPC 3";
+    "Public VPC 1" -> "Public VPC 2" [dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 1" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 2" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
 
-    "Public VPC 1" -> "Logging VPC";
-    "Public VPC 2" -> "Logging VPC";
-    "Public VPC 3" -> "Logging VPC";
+    Internet -> "Monitoring VPC" [dir=both color="blue:green"];
+    Internet -> "Logging VPC" [dir=both color="blue:red"];
 
+    "Monitoring VPC" -> "Public VPC 1" [ color="green"];
+    "Monitoring VPC" -> "Public VPC 2" [ color="green"];
+    "Monitoring VPC" -> "Public VPC 3" [ color="green"];
 
-    "Public VPC 1" -> "Public VPC 2" [dir=both color="red:blue"];
-    "Public VPC 1" -> "Public VPC 3" [dir=both color="red:blue"];
-    "Public VPC 2" -> "Public VPC 3" [dir=both color="red:blue"];
+    "Public VPC 1" -> "Logging VPC" [ color = "darkorchid1" ];
+    "Public VPC 2" -> "Logging VPC" [ color = "darkorchid1" ];
+    "Public VPC 3" -> "Logging VPC" [ color = "darkorchid1" ];
 }
