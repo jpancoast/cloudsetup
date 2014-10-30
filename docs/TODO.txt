@@ -29,3 +29,5 @@ http://dantehranian.wordpress.com/2014/10/25/building-docker-images-within-docke
 http://devo.ps/blog/how-we-use-docker-to-run-and-deploy-devops/
 https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e
 http://devo.ps/
+
+http://www.infoq.com/news/2014/04/elastic_beanstalk_docker
