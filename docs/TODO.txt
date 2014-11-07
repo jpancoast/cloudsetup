@@ -36,3 +36,7 @@ https://medium.com/@ewindisch/on-the-security-of-containers-2c60ffe25a9e
 http://devo.ps/
 
 http://www.infoq.com/news/2014/04/elastic_beanstalk_docker
+
+https://coreos.com/docs/launching-containers/launching/fleet-example-deployment/
+http://engineroom.trackmaven.com/blog/a-better-development-environment-with-docker-and-fig/
+http://www.syncano.com/docker-workflow-fig-sh/
