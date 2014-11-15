@@ -4,6 +4,7 @@ Scripts/playbooks to do the following:
         2+ VPC's for services, etc.
         1 VPC for logging
         1 VPC for monitoring
+        1 VPC for management?
 
     2.  Destroy those two VPC's
 
@@ -43,3 +44,7 @@ http://www.syncano.com/docker-workflow-fig-sh/
 
 http://www.fluentd.org/guides/recipes/graylog2
 http://jasonwilder.com/blog/2014/03/17/docker-log-management-using-fluentd/
+
+
+What to do for creating VPC.
+    VPC with a single public subnet (shit doesn't have to be /16)
