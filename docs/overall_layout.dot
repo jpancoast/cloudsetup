@@ -1,7 +1,6 @@
 digraph G {
-    #http://www.graphviz.org/pdf/dotguide.pdf
-    rankdir = LR
-
+    rankdir=LR
+    
     Internet [ color = blue, style = filled ]
     "Monitoring subnet" [ color = green, style = filled ]
     "Logging subnet" [ color = red, style = filled ]
@@ -18,52 +17,81 @@ digraph G {
     nodesep = .5
 
 
+    subgraph cluster1 
     {
-        rank = min;
+        style="invis"
         Internet;
     }
 
+    subgraph cluster2 
     {
-        rank = same;
-        "Public VPC 1"; "Public VPC 2"; "Public VPC 3";
+        style="invis"
+
+        "Public VPC 1";
+        "Public VPC 2";
+        "Public VPC 3";
+
+        {
+            rank="same"
+            "Public VPC 1";"Public VPC 2";"Public VPC 3";
+        }
     }
 
-
+    subgraph cluster3
     {
-        rank = same;
-        "Monitoring subnet"; "Logging subnet"; "Devops subnet";
+        label="Management VPC"
+        "Logging subnet";
+        "Monitoring subnet";
+        "Devops subnet";
+
+        {
+            rank="same";
+            "Logging subnet";
+            "Monitoring subnet";
+            "Devops subnet";
+        }
     }
 
+    subgraph cluster4
     {
-        rank = max;
+        style="invis"
         "Private / VPN"
+
+        {
+            rank="max";
+            "Private / VPN";
+        }
     }
 
-    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1"];
+
+    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1" constraint=false];
     Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
-    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1" constraint=false];
 
+    "Public VPC 1" -> "Public VPC 2"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 1" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 2" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
 
-    "Public VPC 1" -> "Public VPC 2" [dir=both color="darkorchid1:darkorchid1"];
-    "Public VPC 1" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
-    "Public VPC 2" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 1" -> "Logging subnet"[ color = "darkorchid1" ];
+    "Public VPC 2" -> "Logging subnet"[ color = "darkorchid1" ];
+    "Public VPC 3" -> "Logging subnet"[ color = "darkorchid1" ];
 
-    "Devops subnet" -> "Monitoring subnet" [ color="blue" ];
+    "Monitoring subnet" -> "Public VPC 1"[ color="green" constraint=false];
+    "Monitoring subnet" -> "Public VPC 2"[ color="green"];
+    "Monitoring subnet" -> "Public VPC 3"[ color="green"];
+
+    "Devops subnet" -> "Public VPC 1"[constraint=false color="blue"];
+    "Devops subnet" -> "Public VPC 2"[constraint=false color="blue"];
+    "Devops subnet" -> "Public VPC 3"[constraint=false color="blue"];
+
     "Devops subnet" -> "Logging subnet" [ color="blue" ];
+    "Devops subnet" -> "Monitoring subnet"[ color="blue" ];
 
-    "Private / VPN" -> "Monitoring subnet"
-    "Private / VPN" -> "Logging subnet"
-    "Private / VPN" -> "Devops subnet"
+    "Devops subnet" -> "Private / VPN" [style="invis"]
+    "Monitoring subnet" -> "Private / VPN" [style="invis"]
+    "Logging subnet" -> "Private / VPN" [style="invis"]
 
-    "Devops subnet" -> "Public VPC 1"
-    "Devops subnet" -> "Public VPC 2"
-    "Devops subnet" -> "Public VPC 3"
-
-    "Monitoring subnet" -> "Public VPC 1" [ color="green"];
-    "Monitoring subnet" -> "Public VPC 2" [ color="green"];
-    "Monitoring subnet" -> "Public VPC 3" [ color="green"];
-
-    "Public VPC 1" -> "Logging subnet" [ color = "darkorchid1" ];
-    "Public VPC 2" -> "Logging subnet" [ color = "darkorchid1" ];
-    "Public VPC 3" -> "Logging subnet" [ color = "darkorchid1" ];
+    "Private / VPN" -> "Devops subnet"[constraint=false];
+    "Private / VPN" -> "Monitoring subnet"[constraint=false];
+    "Private / VPN" -> "Logging subnet";
 }
