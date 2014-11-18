@@ -20,7 +20,7 @@ digraph G {
 
     subgraph cluster3
     {
-        label="cluster3"
+        label="Management VPC"
         "Logging subnet";
         "Monitoring subnet";
         "Management subnet";
@@ -33,6 +33,10 @@ digraph G {
         }
     }
 
+    subgraph cluster4
+    {
+        "Private / VPN"
+    }
 
 
     Internet -> "Private VPC 1" [constraint=false];
@@ -51,7 +55,7 @@ digraph G {
     "Monitoring subnet" -> "Private VPC 2";
     "Monitoring subnet" -> "Private VPC 3";
 
-    "Management subnet" -> "Private VPC 1"[constraint=false];
-    "Management subnet" -> "Private VPC 2"[constraint=false];
-    "Management subnet" -> "Private VPC 3"[constraint=false];
+    "Management subnet" -> "Private VPC 1"[dir="both" constraint=false];
+    "Management subnet" -> "Private VPC 2"[dir="both" constraint=false];
+    "Management subnet" -> "Private VPC 3"[dir="both" constraint=false];
 }
