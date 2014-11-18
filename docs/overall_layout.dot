@@ -3,8 +3,8 @@ digraph G {
     rankdir = LR
 
     Internet [ color = blue, style = filled ]
-    "Monitoring VPC" [ color = green, style = filled ]
-    "Logging VPC" [ color = red, style = filled ]
+    "Monitoring subnet" [ color = green, style = filled ]
+    "Logging subnet" [ color = red, style = filled ]
 
     "Public VPC 1" [ color = "darkorchid1", style = filled ]
     "Public VPC 2" [ color = "darkorchid1", style = filled ]
@@ -12,7 +12,7 @@ digraph G {
 
     "Private / VPN" [ color = "brown4", style = filled ]
 
-    "Management VPC" [ color = "chartreuse4", style = filled ]
+    "Management subnet" [ color = "chartreuse4", style = filled ]
 
     ranksep = 2.0
     nodesep = .5
@@ -35,7 +35,7 @@ digraph G {
 
     {
         rank = same;
-        "Monitoring VPC"; "Logging VPC"; "Management VPC";
+        "Monitoring subnet"; "Logging subnet"; "Management subnet";
     }
 
     {
@@ -48,22 +48,22 @@ digraph G {
     "Public VPC 1" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
     "Public VPC 2" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
 
-    "Management VPC" -> "Monitoring VPC" [ color="blue" ];
-    "Management VPC" -> "Logging VPC" [ color="blue" ];
+    "Management subnet" -> "Monitoring subnet" [ color="blue" ];
+    "Management subnet" -> "Logging subnet" [ color="blue" ];
 
-    "Private / VPN" -> "Monitoring VPC"
-    "Private / VPN" -> "Logging VPC"
-    "Private / VPN" -> "Management VPC"
+    "Private / VPN" -> "Monitoring subnet"
+    "Private / VPN" -> "Logging subnet"
+    "Private / VPN" -> "Management subnet"
 
-    "Management VPC" -> "Public VPC 1"
-    "Management VPC" -> "Public VPC 2"
-    "Management VPC" -> "Public VPC 3"
+    "Management subnet" -> "Public VPC 1"
+    "Management subnet" -> "Public VPC 2"
+    "Management subnet" -> "Public VPC 3"
 
-    "Monitoring VPC" -> "Public VPC 1" [ color="green"];
-    "Monitoring VPC" -> "Public VPC 2" [ color="green"];
-    "Monitoring VPC" -> "Public VPC 3" [ color="green"];
+    "Monitoring subnet" -> "Public VPC 1" [ color="green"];
+    "Monitoring subnet" -> "Public VPC 2" [ color="green"];
+    "Monitoring subnet" -> "Public VPC 3" [ color="green"];
 
-    "Public VPC 1" -> "Logging VPC" [ color = "darkorchid1" ];
-    "Public VPC 2" -> "Logging VPC" [ color = "darkorchid1" ];
-    "Public VPC 3" -> "Logging VPC" [ color = "darkorchid1" ];
+    "Public VPC 1" -> "Logging subnet" [ color = "darkorchid1" ];
+    "Public VPC 2" -> "Logging subnet" [ color = "darkorchid1" ];
+    "Public VPC 3" -> "Logging subnet" [ color = "darkorchid1" ];
 }
