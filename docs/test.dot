@@ -18,29 +18,40 @@ digraph G {
         }
     }
 
-#    subgraph cluster3
-#    {
-#        label="cluster3"
-#        blah1;
-#        blah2;
-#        blah3;
-#
-#        {
-#            rank="same";
-#            blah1;blah2;blah3;
-#        }
-#    }
+    subgraph cluster3
+    {
+        label="cluster3"
+        "Logging subnet";
+        "Monitoring subnet";
+        "Management subnet";
+
+        {
+            rank="same";
+            "Logging subnet";
+            "Monitoring subnet";
+            "Management subnet";
+        }
+    }
 
 
 
     Internet -> "Private VPC 1" [constraint=false];
     Internet -> "Private VPC 2";
+    Internet -> "Private VPC 3"[constraint=false];
+
     "Private VPC 1" -> "Private VPC 2"[dir="both"];
-    "Private VPC 1" -> "Private VPC 3"[dir="both"]
-    "Private VPC 2" -> "Private VPC 3"[dir="both"]
+    "Private VPC 1" -> "Private VPC 3"[dir="both"];
+    "Private VPC 2" -> "Private VPC 3"[dir="both"];
 
-    Internet -> "Private VPC 3"[constraint=false]
-#    router1 -> host1;
+    "Private VPC 1" -> "Logging subnet";
+    "Private VPC 2" -> "Logging subnet";
+    "Private VPC 3" -> "Logging subnet";
 
-#    host1 -> host2 [constraint=false];
+    "Monitoring subnet" -> "Private VPC 1"[constraint=false];
+    "Monitoring subnet" -> "Private VPC 2";
+    "Monitoring subnet" -> "Private VPC 3";
+
+    "Management subnet" -> "Private VPC 1"[constraint=false];
+    "Management subnet" -> "Private VPC 2"[constraint=false];
+    "Management subnet" -> "Private VPC 3"[constraint=false];
 }
