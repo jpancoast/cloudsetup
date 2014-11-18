@@ -36,6 +36,11 @@ digraph G {
     subgraph cluster4
     {
         "Private / VPN"
+
+        {
+            rank="max";
+            "Private / VPN";
+        }
     }
 
 
@@ -58,4 +63,15 @@ digraph G {
     "Management subnet" -> "Private VPC 1"[dir="both" constraint=false];
     "Management subnet" -> "Private VPC 2"[dir="both" constraint=false];
     "Management subnet" -> "Private VPC 3"[dir="both" constraint=false];
+
+    "Management subnet" -> "Logging subnet";
+    "Management subnet" -> "Monitoring subnet";
+
+    "Management subnet" -> "Private / VPN" [style="invis"]
+    "Monitoring subnet" -> "Private / VPN" [style="invis"]
+    "Logging subnet" -> "Private / VPN" [style="invis"]
+
+    "Private / VPN" -> "Management subnet"[constraint=false];
+    "Private / VPN" -> "Monitoring subnet"[constraint=false];
+    "Private / VPN" -> "Logging subnet";
 }
