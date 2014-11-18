@@ -1,13 +1,16 @@
 digraph G {
     rankdir=LR
 
-    subgraph cluster1 {
-        label="The World";
+    subgraph cluster1 
+    {
+        style="invis"
         Internet;
-#        host1;
     }
-    subgraph cluster2 {
-#        label="Remote Datacenter";
+
+    subgraph cluster2 
+    {
+        style="invis"
+        
         "Private VPC 1";
         "Private VPC 2";
         "Private VPC 3";
@@ -35,6 +38,7 @@ digraph G {
 
     subgraph cluster4
     {
+        style="invis"
         "Private / VPN"
 
         {
