@@ -1,0 +1,46 @@
+digraph G {
+    rankdir=LR
+
+    subgraph cluster1 {
+        label="The World";
+        Internet;
+#        host1;
+    }
+    subgraph cluster2 {
+#        label="Remote Datacenter";
+        "Private VPC 1";
+        "Private VPC 2";
+        "Private VPC 3";
+
+        {
+            rank="same"
+            "Private VPC 1";"Private VPC 2";"Private VPC 3";
+        }
+    }
+
+#    subgraph cluster3
+#    {
+#        label="cluster3"
+#        blah1;
+#        blah2;
+#        blah3;
+#
+#        {
+#            rank="same";
+#            blah1;blah2;blah3;
+#        }
+#    }
+
+
+
+    Internet -> "Private VPC 1" [constraint=false];
+    Internet -> "Private VPC 2";
+    "Private VPC 1" -> "Private VPC 2"[dir="both"];
+    "Private VPC 1" -> "Private VPC 3"[dir="both"]
+    "Private VPC 2" -> "Private VPC 3"[dir="both"]
+
+    Internet -> "Private VPC 3"[constraint=false]
+#    router1 -> host1;
+
+#    host1 -> host2 [constraint=false];
+}

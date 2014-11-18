@@ -17,10 +17,6 @@ digraph G {
     ranksep = 2.0
     nodesep = .5
 
-    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1"];
-    Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
-    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1"];
-
 
     {
         rank = min;
@@ -42,6 +38,10 @@ digraph G {
         rank = max;
         "Private / VPN"
     }
+
+    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1"];
 
 
     "Public VPC 1" -> "Public VPC 2" [dir=both color="darkorchid1:darkorchid1"];
