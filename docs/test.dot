@@ -27,13 +27,13 @@ digraph G {
     {
         style="invis"
 
-        "Private VPC 1";
-        "Private VPC 2";
-        "Private VPC 3";
+        "Public VPC 1";
+        "Public VPC 2";
+        "Public VPC 3";
 
         {
             rank="same"
-            "Private VPC 1";"Private VPC 2";"Private VPC 3";
+            "Public VPC 1";"Public VPC 2";"Public VPC 3";
         }
     }
 
@@ -64,28 +64,28 @@ digraph G {
     }
 
 
-    Internet -> "Private VPC 1" [constraint=false];
-    Internet -> "Private VPC 2";
-    Internet -> "Private VPC 3"[constraint=false];
+    Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1" constraint=false];
+    Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
+    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1" constraint=false];
 
-    "Private VPC 1" -> "Private VPC 2"[dir="both"];
-    "Private VPC 1" -> "Private VPC 3"[dir="both"];
-    "Private VPC 2" -> "Private VPC 3"[dir="both"];
+    "Public VPC 1" -> "Public VPC 2"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 1" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 2" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
 
-    "Private VPC 1" -> "Logging subnet";
-    "Private VPC 2" -> "Logging subnet";
-    "Private VPC 3" -> "Logging subnet";
+    "Public VPC 1" -> "Logging subnet"[ color = "darkorchid1" ];
+    "Public VPC 2" -> "Logging subnet"[ color = "darkorchid1" ];
+    "Public VPC 3" -> "Logging subnet"[ color = "darkorchid1" ];
 
-    "Monitoring subnet" -> "Private VPC 1"[constraint=false];
-    "Monitoring subnet" -> "Private VPC 2";
-    "Monitoring subnet" -> "Private VPC 3";
+    "Monitoring subnet" -> "Public VPC 1"[ color="green" constraint=false];
+    "Monitoring subnet" -> "Public VPC 2"[ color="green"];
+    "Monitoring subnet" -> "Public VPC 3"[ color="green"];
 
-    "Management subnet" -> "Private VPC 1"[dir="both" constraint=false];
-    "Management subnet" -> "Private VPC 2"[dir="both" constraint=false];
-    "Management subnet" -> "Private VPC 3"[dir="both" constraint=false];
+    "Management subnet" -> "Public VPC 1"[constraint=false];
+    "Management subnet" -> "Public VPC 2"[constraint=false];
+    "Management subnet" -> "Public VPC 3"[constraint=false];
 
-    "Management subnet" -> "Logging subnet";
-    "Management subnet" -> "Monitoring subnet";
+    "Management subnet" -> "Logging subnet" [ color="blue" ];
+    "Management subnet" -> "Monitoring subnet"[ color="blue" ];
 
     "Management subnet" -> "Private / VPN" [style="invis"]
     "Monitoring subnet" -> "Private / VPN" [style="invis"]

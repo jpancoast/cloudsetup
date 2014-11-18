@@ -5,7 +5,7 @@ digraph G {
     Internet [ color = blue, style = filled ]
     "Monitoring subnet" [ color = green, style = filled ]
     "Logging subnet" [ color = red, style = filled ]
-    "Management subnet" [ color = "chartreuse4", style = filled ]
+    "Devops subnet" [ color = "chartreuse4", style = filled ]
 
     "Public VPC 1" [ color = "darkorchid1", style = filled ]
     "Public VPC 2" [ color = "darkorchid1", style = filled ]
@@ -31,7 +31,7 @@ digraph G {
 
     {
         rank = same;
-        "Monitoring subnet"; "Logging subnet"; "Management subnet";
+        "Monitoring subnet"; "Logging subnet"; "Devops subnet";
     }
 
     {
@@ -48,16 +48,16 @@ digraph G {
     "Public VPC 1" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
     "Public VPC 2" -> "Public VPC 3" [dir=both color="darkorchid1:darkorchid1"];
 
-    "Management subnet" -> "Monitoring subnet" [ color="blue" ];
-    "Management subnet" -> "Logging subnet" [ color="blue" ];
+    "Devops subnet" -> "Monitoring subnet" [ color="blue" ];
+    "Devops subnet" -> "Logging subnet" [ color="blue" ];
 
     "Private / VPN" -> "Monitoring subnet"
     "Private / VPN" -> "Logging subnet"
-    "Private / VPN" -> "Management subnet"
+    "Private / VPN" -> "Devops subnet"
 
-    "Management subnet" -> "Public VPC 1"
-    "Management subnet" -> "Public VPC 2"
-    "Management subnet" -> "Public VPC 3"
+    "Devops subnet" -> "Public VPC 1"
+    "Devops subnet" -> "Public VPC 2"
+    "Devops subnet" -> "Public VPC 3"
 
     "Monitoring subnet" -> "Public VPC 1" [ color="green"];
     "Monitoring subnet" -> "Public VPC 2" [ color="green"];
