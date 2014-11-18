@@ -1,5 +1,21 @@
 digraph G {
     rankdir=LR
+    
+    Internet [ color = blue, style = filled ]
+    "Monitoring subnet" [ color = green, style = filled ]
+    "Logging subnet" [ color = red, style = filled ]
+    "Management subnet" [ color = "chartreuse4", style = filled ]
+
+    "Public VPC 1" [ color = "darkorchid1", style = filled ]
+    "Public VPC 2" [ color = "darkorchid1", style = filled ]
+    "Public VPC 3" [ color = "darkorchid1", style = filled ]
+
+    "Private / VPN" [ color = "brown4", style = filled ]
+
+
+    ranksep = 2.0
+    nodesep = .5
+
 
     subgraph cluster1 
     {
@@ -10,7 +26,7 @@ digraph G {
     subgraph cluster2 
     {
         style="invis"
-        
+
         "Private VPC 1";
         "Private VPC 2";
         "Private VPC 3";
