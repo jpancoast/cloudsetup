@@ -8,7 +8,7 @@ digraph G {
 
     "Public VPC 1" [ color = "darkorchid1", style = filled ]
     "Public VPC 2" [ color = "darkorchid1", style = filled ]
-    "Public VPC 3" [ color = "darkorchid1", style = filled ]
+    "Public VPC ... N" [ color = "darkorchid1", style = filled ]
 
     "Private / VPN" [ color = "brown4", style = filled ]
 
@@ -29,11 +29,11 @@ digraph G {
 
         "Public VPC 1";
         "Public VPC 2";
-        "Public VPC 3";
+        "Public VPC ... N";
 
         {
             rank="same"
-            "Public VPC 1";"Public VPC 2";"Public VPC 3";
+            "Public VPC 1";"Public VPC 2";"Public VPC ... N";
         }
     }
 
@@ -66,23 +66,23 @@ digraph G {
 
     Internet -> "Public VPC 1" [dir=both color="blue:darkorchid1" constraint=false];
     Internet -> "Public VPC 2" [dir=both color="blue:darkorchid1"];
-    Internet -> "Public VPC 3" [dir=both color="blue:darkorchid1" constraint=false];
+    Internet -> "Public VPC ... N" [dir=both color="blue:darkorchid1" constraint=false];
 
     "Public VPC 1" -> "Public VPC 2"[dir=both color="darkorchid1:darkorchid1"];
-    "Public VPC 1" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
-    "Public VPC 2" -> "Public VPC 3"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 1" -> "Public VPC ... N"[dir=both color="darkorchid1:darkorchid1"];
+    "Public VPC 2" -> "Public VPC ... N"[dir=both color="darkorchid1:darkorchid1"];
 
     "Public VPC 1" -> "Logging subnet"[ color = "darkorchid1" ];
     "Public VPC 2" -> "Logging subnet"[ color = "darkorchid1" ];
-    "Public VPC 3" -> "Logging subnet"[ color = "darkorchid1" ];
+    "Public VPC ... N" -> "Logging subnet"[ color = "darkorchid1" ];
 
     "Monitoring subnet" -> "Public VPC 1"[ color="green" constraint=false];
     "Monitoring subnet" -> "Public VPC 2"[ color="green"];
-    "Monitoring subnet" -> "Public VPC 3"[ color="green"];
+    "Monitoring subnet" -> "Public VPC ... N"[ color="green"];
 
     "Devops subnet" -> "Public VPC 1"[constraint=false color="blue"];
     "Devops subnet" -> "Public VPC 2"[constraint=false color="blue"];
-    "Devops subnet" -> "Public VPC 3"[constraint=false color="blue"];
+    "Devops subnet" -> "Public VPC ... N"[constraint=false color="blue"];
 
     "Devops subnet" -> "Logging subnet" [ color="blue" ];
     "Devops subnet" -> "Monitoring subnet"[ color="blue" ];
