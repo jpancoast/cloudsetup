@@ -24,6 +24,7 @@ Scripts/playbooks to do the following:
 
 
 Create inventory files for all possible regions?
+Find a way to tag IGW, acl's, route?
 
 
 Perhaps a python script (or scripts) that loads all inventory files and runs ansible for the all inventory files (so it would run it for us-east-1, us-west-2, all the regions. Or something.)
