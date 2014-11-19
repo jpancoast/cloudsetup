@@ -3,9 +3,9 @@ Scripts/playbooks to do the following:
     1.  Create VPC's in separate regions with intra-VPC connectivity with:
         2+ VPC's for services, etc.
         1 management VPC that contains the following subnets:
-            logging
-            monitoring
-            devops
+            logging (subnets: 172.22.0.0/25, 172.22.0.128/25, 172.22.1.0/25)
+            monitoring (subnets: 172.22.1.128/25, 172.22.2.0/25, 172.22.2.128/25)
+            devops (subnets: 172.22.3.0/25, 172.22.3.128/25, 172.22.4.0/25)
 
     2.  Destroy those two VPC's
 
@@ -21,6 +21,9 @@ Scripts/playbooks to do the following:
 
     8.  Destroy those ELB's
 
+
+
+Create inventory files for all possible regions?
 
 
 Perhaps a python script (or scripts) that loads all inventory files and runs ansible for the all inventory files (so it would run it for us-east-1, us-west-2, all the regions. Or something.)

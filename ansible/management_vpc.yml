@@ -1,0 +1,70 @@
+---
+- name: "Create VPC"
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Create Management vpc
+      local_action:
+        module: ec2_vpc
+        state: present
+        cidr_block: 172.22.0.0/21
+        resource_tags: { "Name": "Management" }
+        subnets:
+
+          #
+          #   Logging subnets
+          #
+          - cidr: 172.22.0.0/25
+            az: "{{ region }}{{az_1}}"
+            resource_tags: { "Environment":"Management", "Name" : "Logging AZ: {{ region }}{{az_1}}" }
+          - cidr: 172.22.0.128/25
+            az: "{{ region }}{{az_2}}"
+            resource_tags: { "Environment":"Management", "Name" : "Logging AZ: {{ region }}{{az_2}}" }
+          - cidr: 172.22.1.0/25
+            az: "{{ region }}{{az_3}}"
+            resource_tags: { "Environment":"Management", "Name" : "Logging AZ: {{ region }}{{az_3}}" }
+
+          #
+          #   Monitoring subnets
+          #
+          - cidr: 172.22.1.128/25
+            az: "{{ region }}{{az_1}}"
+            resource_tags: { "Environment":"Management", "Name" : "Monitoring AZ: {{ region }}{{az_1}}" }
+          - cidr: 172.22.2.0/25
+            az: "{{ region }}{{az_2}}"
+            resource_tags: { "Environment":"Management", "Name" : "Monitoring AZ: {{ region }}{{az_2}}" }
+          - cidr: 172.22.2.128/25
+            az: "{{ region }}{{az_3}}"
+            resource_tags: { "Environment":"Management", "Name" : "Monitoring AZ: {{ region }}{{az_3}}" }
+
+          #
+          #   devops subnets
+          #
+          - cidr: 172.22.3.0/25
+            az: "{{ region }}{{az_1}}"
+            resource_tags: { "Environment":"Management", "Name" : "Devops AZ: {{ region }}{{az_1}}" }
+          - cidr: 172.22.3.128/25
+            az: "{{ region }}{{az_2}}"
+            resource_tags: { "Environment":"Management", "Name" : "Devops AZ: {{ region }}{{az_2}}" }
+          - cidr: 172.22.4.0/25
+            az: "{{ region }}{{az_3}}"
+            resource_tags: { "Environment":"Management", "Name" : "Devops AZ: {{ region }}{{az_3}}" }
+
+        internet_gateway: True
+        route_tables:
+          - subnets:
+              - 172.22.0.0/25
+              - 172.22.0.128/25
+              - 172.22.1.0/25
+              - 172.22.1.128/25
+              - 172.22.2.0/25
+              - 172.22.2.128/25
+              - 172.22.3.0/25
+              - 172.22.3.128/25
+              - 172.22.4.0/25
+            routes:
+              - dest: 0.0.0.0/0
+                gw: igw
+        region: "{{ region }}"
+      register: vpc

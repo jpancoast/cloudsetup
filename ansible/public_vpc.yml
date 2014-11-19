@@ -3,6 +3,12 @@
   hosts: localhost
   gather_facts: no
 
+#... Need to modify this for the 'public VPC' creation ...
+#Perhaps this shouldall be 10....
+#3 /24's for ELB's
+#3 / 24's for instances
+#Pass in an inventory file with variables that tell us where to be created.
+
   tasks:
     - name: create vpc
       local_action:

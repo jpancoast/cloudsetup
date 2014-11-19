@@ -1,1 +1,5 @@
-vpc_cidr: 192.168.0.0/16
+az_1: a
+az_2: c
+az_3: d
+
+region: us-east-1
