@@ -3,41 +3,50 @@
   hosts: localhost
   gather_facts: no
 
-#... Need to modify this for the 'public VPC' creation ...
-#Perhaps this shouldall be 10....
-#3 /24's for ELB's
-#3 / 24's for instances
-#Pass in an inventory file with variables that tell us where to be created.
-
   tasks:
     - name: create vpc
       local_action:
         module: ec2_vpc
         state: present
-        cidr_block: 172.22.0.0/16
-        resource_tags: { "Environment":"Development" }
+        cidr_block: "{{ vpc_cidr }}"
+        resource_tags: { "Name":"Public VPC {{ region }}" }
         subnets:
-          - cidr: 172.22.1.0/24
-            az: us-west-2c
-            resource_tags: { "Environment":"Dev", "Tier" : "Web" }
-          - cidr: 172.22.2.0/24
-            az: us-west-2b
-            resource_tags: { "Environment":"Dev", "Tier" : "App" }
-          - cidr: 172.22.3.0/24
-            az: us-west-2a
-            resource_tags: { "Environment":"Dev", "Tier" : "DB" }
+
+          #
+          # ELB subnets
+          #
+          - cidr: "{{ elb_cidr_1 }}"
+            az: "{{ region }}{{ az_1 }}"
+            resource_tags: { "Name": "ELB CIDR {{ region }}{{ az_1 }}" }
+          - cidr: "{{ elb_cidr_2 }}"
+            az: "{{ region }}{{ az_2 }}"
+            resource_tags: { "Name": "ELB CIDR {{ region }}{{ az_2 }}" }
+          - cidr: "{{ elb_cidr_3 }}"
+            az: "{{ region }}{{ az_3 }}"
+            resource_tags: { "Name": "ELB CIDR {{ region }}{{ az_3 }}" }
+
+          #
+          # EC2 subnets
+          #
+          - cidr: "{{ ec2_cidr_1 }}"
+            az: "{{ region }}{{ az_1 }}"
+            resource_tags: { "Name": "EC2 CIDR {{ region }}{{ az_1 }}" }
+          - cidr: "{{ ec2_cidr_2 }}"
+            az: "{{ region }}{{ az_2 }}"
+            resource_tags: { "Name": "EC2 CIDR {{ region }}{{ az_2 }}" }
+          - cidr: "{{ ec2_cidr_3 }}"
+            az: "{{ region }}{{ az_3 }}"
+            resource_tags: { "Name": "EC2 CIDR {{ region }}{{ az_3 }}" }
+
         internet_gateway: True
         route_tables:
           - subnets:
-              - 172.22.2.0/24
-              - 172.22.3.0/24
+              - "{{ ec2_cidr_1 }}"
+              - "{{ ec2_cidr_2 }}"
+              - "{{ ec2_cidr_3 }}"
             routes:
               - dest: 0.0.0.0/0
                 gw: igw
-          - subnets:
-              - 172.22.1.0/24
-            routes:
-              - dest: 0.0.0.0/0
-                gw: igw
-        region: us-west-2
+
+        region: "{{ region }}"
       register: vpc
