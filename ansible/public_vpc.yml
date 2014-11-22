@@ -38,12 +38,28 @@
             az: "{{ region }}{{ az_3 }}"
             resource_tags: { "Name": "EC2 CIDR {{ region }}{{ az_3 }}" }
 
+          #
+          #   Data subnets
+          #
+          - cidr: "{{ data_cidr_1 }}"
+            az: "{{ region }}{{ az_1 }}"
+            resource_tags: { "Name": "Data CIDR {{ region }}{{ az_1 }}" }
+          - cidr: "{{ data_cidr_2 }}"
+            az: "{{ region }}{{ az_1 }}"
+            resource_tags: { "Name": "Data CIDR {{ region }}{{ az_1 }}" }
+          - cidr: "{{ data_cidr_3 }}"
+            az: "{{ region }}{{ az_1 }}"
+            resource_tags: { "Name": "Data CIDR {{ region }}{{ az_1 }}" }
+
         internet_gateway: True
         route_tables:
           - subnets:
               - "{{ ec2_cidr_1 }}"
               - "{{ ec2_cidr_2 }}"
               - "{{ ec2_cidr_3 }}"
+              - "{{ data_cidr_1 }}"
+              - "{{ data_cidr_2 }}"
+              - "{{ data_cidr_3 }}"
             routes:
               - dest: 0.0.0.0/0
                 gw: igw
